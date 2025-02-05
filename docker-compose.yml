@@ -24,6 +24,7 @@ services:
     environment:
       MYSQL_DATABASE: 'test'
       MYSQL_ROOT_PASSWORD: '12345678'
+      MARIADB_ROOT_PASSWORD: '12345678'
     networks:
       - my_network
     ports:
@@ -33,6 +34,7 @@ services:
       - ./data/logs:/logs
       - /usr/local/var/mysql:/var/lib/mysql
       - mysql_data:/var/lib/mysql
+      - ./backend/books_table.sql:/docker-entrypoint-initdb.d/init.sql
     healthcheck:
       test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
       interval: 10s
