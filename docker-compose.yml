@@ -1,0 +1,27 @@
+version: '2.0'
+
+services:
+  frontend:
+    build: ./frontend
+    ports:
+      - "5173:5173"
+    environment:
+      - VITE_HOST=0.0.0.0
+  
+  backend:
+    build: ./backend
+    ports:
+      - "8800:8800"
+
+  mysql:
+    image: mariadb:10.5.8
+    container_name: mysql
+    environment:
+      MYSQL_DATABASE: 'mysql'
+      MYSQL_ROOT_PASSWORD: '12345678'
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./data/conf.d:/etc/mysql/conf.d
+      - ./data/logs:/logs
+      - /usr/local/var/mysql:/var/lib/mysql
