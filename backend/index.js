@@ -5,10 +5,18 @@ import cors from "cors"
 const app = express();
 
 const db = mysql.createConnection({
-    host: "localhost",
+    host: "mysql",
     user: "root",
-    password: "",
+    password: "12345678",
     database: "test"
+})
+
+db.connect((err) => {
+  if (err) {
+    console.error("Database connection failed: ", err.message);
+  } else {
+    console.log("Connected");
+  }
 })
 
 app.use(express.json())//return json data using the api server postman
